@@ -1,0 +1,10 @@
+<html>
+<h1>These are the menu items:</h1>
+<!-- Uses django template to create a list item for each item in the menu (for loop)-->
+<ul>
+    {% for item in menu %}
+    <li>{{item.pizza_type}}</li>
+    {% endfor %}
+</ul>
+
+</html>
