@@ -11,17 +11,19 @@ def home(request):
     return render(request, 'home/welcome.html', {'today': datetime.today()})
 
 
-# redirects to admin login page
+# redirects to admin login page; used for pages requiring login
 @login_required(login_url='/admin')
 def authorized(request):
     return render(request, 'home/authorized.html', {})
 
-# returns all the names of menu items
+# returns all the names of menu items currently in the database
 
 
 def menu_list(request):
     menu_items = Menu.objects.all()
     return render(request, 'home/menu_list.html', {'menu': menu_items})
+
+# Displays the details about a specific menu item
 
 
 def menu_item_info(request, pk):
