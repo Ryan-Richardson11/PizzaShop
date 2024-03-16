@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+# Include home.urls to eliminate dependencies between apps. All urls in home directory will be applied
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')),
