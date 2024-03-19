@@ -32,3 +32,7 @@ def menu_item_info(request, pk):
     except Menu.DoesNotExist:
         raise Http404('Item does not exist')
     return render(request, 'home/item_detail.html', {'item': item})
+
+
+def item_checkout(request):
+    pass
