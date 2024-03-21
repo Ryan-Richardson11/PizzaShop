@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, Http404
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from .models import Menu
+from .models import Menu, Size
 
 # Create your views here.
 
@@ -29,9 +29,10 @@ def menu_list(request):
 def menu_item_info(request, pk):
     try:
         item = Menu.objects.get(pk=pk)
+        sizes = Size.objects.all()
     except Menu.DoesNotExist:
         raise Http404('Item does not exist')
-    return render(request, 'home/item_detail.html', {'item': item})
+    return render(request, 'home/item_detail.html', {'item': item, 'sizes': sizes})
 
 
 def item_checkout(request):

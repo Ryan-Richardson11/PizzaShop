@@ -6,6 +6,9 @@ from django.db import models
 class Topping(models.Model):
     name = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.name
+
 
 class Size(models.Model):
     size = models.CharField(max_length=25)
@@ -16,7 +19,6 @@ class Size(models.Model):
 class Menu(models.Model):
     pizza_type = models.CharField(max_length=50)
     toppings = models.ManyToManyField(Topping, blank=True)
-    size = models.CharField(Size, max_length=25, default='Large')
     description = models.TextField()
 
 # class Cart(models.Model):
