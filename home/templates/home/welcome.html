@@ -1,11 +1,7 @@
-<html>
-<header>
-    <title>PizzaShop</title>
-</header>
+{% extends "base.html" %}
 
-<body>
-    <h1>Welcome to the PizzaShop!</h1>
-    <p>Today is {{today}}</p>
-</body>
-
-</html>
+{% block content %}
+<h1>Welcome to the PizzaShop!</h1>
+<p>Today is {{ today }}</p>
+<a href="{% url 'menu.list' %}" class="btn btn-primary">Menu</a>
+{% endblock %}
