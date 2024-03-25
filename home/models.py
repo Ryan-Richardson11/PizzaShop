@@ -20,6 +20,7 @@ class Menu(models.Model):
     pizza_type = models.CharField(max_length=50)
     toppings = models.ManyToManyField(Topping, blank=True)
     description = models.TextField()
+    image_url = models.URLField(blank=True, null=True)
 
 # class Cart(models.Model):
     # order_time = models.DateTimeField(auto_now_add=True)
