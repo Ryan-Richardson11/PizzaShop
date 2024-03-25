@@ -1,12 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>These are the menu items:</h1>
+<h1 class="my-5">These are the menu items:</h1>
 <!-- Uses django template to create a list item for each item in the menu (for loop)-->
-<ul>
+<div class="row row-cols3 g-2">
     {% for item in menu %}
-    <li>{{item.pizza_type}}</li>
+    <div class="col">
+        <div class="p-3 border">
+            <a href="{% url 'menu.detail' pk=item.id %}" class="text-dark text-decoration-non">
+                <h3>{{item.pizza_type}}</h3>
+                {% if item.pizza_type == 'Cheese' %}
+                <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fsimilarpng.com%2Fdelicious-pizza-with-cheese-on-transparent-background-png-2%2F&psig=AOvVaw0b9lk5Vjd_DR9kvWLChIL6&ust=1711477114583000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCLDbzJ2DkIUDFQAAAAAdAAAAABAE"
+                    alt="cheese pizza">
+            </a>
+        </div>
+    </div>
     {% endfor %}
-</ul>
-
+</div>
 {% endblock %}

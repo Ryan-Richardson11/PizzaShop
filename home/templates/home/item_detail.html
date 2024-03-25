@@ -1,17 +1,20 @@
-<html>
-<h1>{{ item.pizza_type }}</h1>
-{% for topping in item.toppings.all %}
-<ul>
-    <li>{{ topping.name }}</li>
-</ul>
-{% endfor %}
-<p>{{ item.description }}</p>
-<label>Choose Size:</label>
-<select name="size">
-    {% for size in sizes %}
-    <option> {{size.size}} </option>
-    {% endfor %}
-</select>
-<input type="submit" value="Add to Cart">
+{% extends "base.html" %}
 
-</html>
+{% block content %}
+<div class="border round">
+    <h1 class="my-5">{{ item.pizza_type }}</h1>
+    {% for topping in item.toppings.all %}
+    <ul>
+        <li>{{ topping.name }}</li>
+    </ul>
+    {% endfor %}
+    <p>{{ item.description }}</p>
+    <label>Choose Size:</label>
+    <select name="size">
+        {% for size in sizes %}
+        <option> {{size.size}} </option>
+        {% endfor %}
+    </select>
+    <input type="submit" value="Add to Cart">
+</div>
+{% endblock %}
