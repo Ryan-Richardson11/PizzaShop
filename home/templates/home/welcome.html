@@ -1,7 +1,12 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to the PizzaShop!</h1>
-<p>Today is {{ today }}</p>
-<a href="{% url 'menu.list' %}" class="btn btn-primary">Menu</a>
+<div>
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{% url 'cart.items' %}" class="btn btn-primary">Go to cart</a>
+    </div>
+    <h1>Welcome to the PizzaShop!</h1>
+    <p>Today is {{ today }}</p>
+    <a href="{% url 'menu.list' %}" class="btn btn-primary">Menu</a>
+</div>
 {% endblock %}

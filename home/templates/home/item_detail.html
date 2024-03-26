@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+<div class="d-flex justify-content-end mb-3">
+    <a href="{% url 'cart.items' %}" class="btn btn-primary">Go to cart</a>
+</div>
 <div class="border round">
     <h1 class="my-5">{{ item.pizza_type }}</h1>
     {% for topping in item.toppings.all %}

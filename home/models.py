@@ -22,6 +22,11 @@ class Menu(models.Model):
     description = models.TextField()
     image_url = models.URLField(blank=True, null=True)
 
-# class Cart(models.Model):
-    # order_time = models.DateTimeField(auto_now_add=True)
-#     pass
+
+class CartItem(models.Model):
+    menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
+    item_size = models.ForeignKey(Size, on_delete=models.CASCADE)
+
+
+class Cart(models.Model):
+    items = models.ManyToManyField(CartItem)

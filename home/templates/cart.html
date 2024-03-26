@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="my-5">Cart items:</h1>
+<div class="row row-cols3 g-2">
+    {% for item in cart_items %}
+    <div class="col">
+        <div class="p-3 border">
+            {{ item.menu_item.pizza_type }}
+            {{ item.item_size.size }}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
