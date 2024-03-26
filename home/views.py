@@ -1,8 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, Http404
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from .models import Menu, Size, Cart
+from .models import Menu, Size, Cart, CartItem
 
 # Create your views here.
 
@@ -35,9 +35,30 @@ def menu_item_info(request, pk):
     return render(request, 'home/item_detail.html', {'item': item, 'sizes': sizes})
 
 
+def add_to_cart(request, pk):
+    if request.method == 'POST':
+        try:
+            menu_item = Menu.objects.get(pk=pk)
+            cart_item = CartItem(menu_item=menu_item)
+            cart_item.save()
+        except:
+            raise Http404('Could not add item to cart')
+        print("Item added successfully")
+        return redirect('menu.detail', pk=pk)
+
+    else:
+        raise Http404('Invalid request method')
+
+
 def view_cart(request):
     try:
-        cart_items = Cart.objects.all()
-    except:
-        raise Http404('Item does not exist')
-    return render(request, 'home/cart.html', {'cart_items': cart_items, })
+        if 'cart_id' in request.session:
+            cart_id = request.session['cart_id']
+            cart = Cart.objects.get(pk=cart_id)
+            cart_items = cart.items.all()
+        else:
+            cart_items = []
+    except Cart.DoesNotExist:
+        cart_items = []
+
+    return render(request, 'home/cart.html', {'cart_items': cart_items})

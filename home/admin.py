@@ -16,6 +16,16 @@ class SizeAdmin(admin.ModelAdmin):
     list_display = ('size',)
 
 
+class CartItemAdmin(admin.ModelAdmin):
+    pass
+
+
+class CartAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(models.Menu, MenuAdmin)
 admin.site.register(models.Topping, ToppingAdmin)
 admin.site.register(models.Size, SizeAdmin)
+admin.site.register(models.Cart, CartAdmin)
+admin.site.register(models.CartItem, CartItemAdmin)

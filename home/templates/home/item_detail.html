@@ -4,20 +4,50 @@
 <div class="d-flex justify-content-end mb-3">
     <a href="{% url 'cart.items' %}" class="btn btn-primary">Go to cart</a>
 </div>
-<div class="border round">
-    <h1 class="my-5">{{ item.pizza_type }}</h1>
-    {% for topping in item.toppings.all %}
-    <ul>
-        <li>{{ topping.name }}</li>
-    </ul>
-    {% endfor %}
-    <p>{{ item.description }}</p>
-    <label>Choose Size:</label>
-    <select name="size">
-        {% for size in sizes %}
-        <option> {{size.size}} </option>
-        {% endfor %}
-    </select>
-    <input type="submit" value="Add to Cart">
+<div class="border round">\
+    <form id="add-to-cart-form" method="post" action="{% url 'add_to_cart' pk=item.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="pk" value="{{ item.pk }}">
+        <h1 class="my-5">{{ item.pizza_type }}</h1>
+        <div class="container">
+            {% for topping in item.toppings.all %}
+            <ul>
+                <li>{{ topping.name }}</li>
+            </ul>
+            {% endfor %}
+        </div>
+        <p>{{ item.description }}</p>
+        <label>Choose Size:</label>
+        <select name="size">
+            {% for size in sizes %}
+            <option>{{ size.size }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Add to Cart">
+    </form>
 </div>
+
+<script>
+    document.getElementById("add-to-cart-form").addEventListener("submit", function (event) {
+        event.preventDefault();
+        var form = event.target;
+        var formData = new FormData(form);
+
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'X-CSRFToken': '{{ csrf_token }}',
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+</script>
+
 {% endblock %}
