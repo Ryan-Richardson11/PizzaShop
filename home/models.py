@@ -22,10 +22,14 @@ class Menu(models.Model):
     description = models.TextField()
     image_url = models.URLField(blank=True, null=True)
 
+# Represents individual cart items
+
 
 class CartItem(models.Model):
     menu_item = models.ForeignKey(Menu, on_delete=models.CASCADE)
     item_size = models.ForeignKey(Size, on_delete=models.CASCADE)
+
+# Represents all cartItems in the cart
 
 
 class Cart(models.Model):

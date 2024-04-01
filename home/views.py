@@ -34,6 +34,8 @@ def menu_item_info(request, pk):
         raise Http404('Item does not exist')
     return render(request, 'home/item_detail.html', {'item': item, 'sizes': sizes})
 
+# Adds cartItems to the cart
+
 
 def add_to_cart(request, pk):
     if request.method == 'POST':
@@ -48,6 +50,8 @@ def add_to_cart(request, pk):
 
     else:
         raise Http404('Invalid request method')
+
+# Displays all items within a cart
 
 
 def view_cart(request):
